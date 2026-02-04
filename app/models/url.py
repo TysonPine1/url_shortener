@@ -12,6 +12,8 @@ class URL(Base):
 
     access_count = Column(Integer, default=0)
 
+    expires_at = Column(DateTime, nullable=True)
+
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(
         DateTime,
