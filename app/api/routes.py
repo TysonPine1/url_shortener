@@ -31,15 +31,15 @@ def create_short_url(payload: URLCreate, db: Session = Depends(get_db)):
 
     return url
 
-@router.get("/{short_code}")
+@router.get("/{short_code}", status_code=status.HTTP_302_FOUND, include_in_schema=False)
 def redirect_url(short_code: str, db: Session = Depends(get_db)):
     url = db.query(URL).filter(URL.short_code == short_code).first()
 
     if not url:
-        raise HTTPException(status_code=404, detail="Short URL not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Short URL not found")
 
     if url.expires_at and url.expires_at < datetime.utcnow():
-        raise HTTPException(status_code=410, detail="Short URL has expired")
+        raise HTTPException(status_code=status.HTTP_410_GONE, detail="Short URL has expired")
 
     url.access_count += 1
     db.commit()
