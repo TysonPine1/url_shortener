@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.responses import RedirectResponse
 from app.db.database import engine, Base
 from app.models import url
 from app.api.routes import router 
@@ -15,5 +16,5 @@ app.include_router(router)
 
 @app.get("/")
 def root():
-    return {"message": "Welcome to the URL shortener service!"}
+    return RedirectResponse(url="/docs")
 
