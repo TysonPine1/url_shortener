@@ -1,5 +1,15 @@
-DB_USER=postgres
-DB_PASSWORD=vertin1999
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=url_shortener
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+# Environment variables
+.env
+# Docker
+*.log
+# OS
+.DS_Store
+Thumbs.db
+# Virtual environments
+venv/
+.env/
